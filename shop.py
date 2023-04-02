@@ -43,9 +43,11 @@ def buy_item(choice, customer_money, items):
         return customer_money, 0
     else:
         attempts = 0
+        additional_money = 0  # Initialize additional_money variable
         while attempts < 3:
-            additional_money = get_additional_money()
-            customer_money += additional_money
+            more_money = get_additional_money()
+            additional_money += more_money  # Accumulate additional money entered by user
+            customer_money += more_money  # Add additional money to customer's total money
             if customer_money >= items[choice]:
                 print(f"Here's your {choice}!")
                 customer_money -= items[choice]
@@ -54,6 +56,7 @@ def buy_item(choice, customer_money, items):
                 attempts += 1
         else:
             raise InsufficientFundsError("You do not have enough money for this item. Goodbye!")
+
 
 
 def shop():
