@@ -1,6 +1,6 @@
 import unittest
 
-import test_isogram
+
 from main import isogram_check
 
 
