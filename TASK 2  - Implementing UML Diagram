@@ -1,0 +1,55 @@
+import abc
+import math
+
+
+class Shape(object):
+    __metaclass__ = abc.ABCMeta
+
+    @abc.abstractmethod
+    def calc_perimeter(self):
+        """Method documentation"""
+        return
+
+
+class Triangle(Shape):
+    def __init__(self, a, b, c):
+        self.a = a
+        self.b = b
+        self.c = c
+
+    def calc_perimeter(self):
+        perim = self.a + self.b + self.c
+        print("Triangle perimeter:", perim)
+        return perim
+
+
+class Circle(Shape):
+    def __init__(self, r):
+        self.r = r
+
+    def calc_perimeter(self):
+        perim = 2 * math.pi * self.r
+        print("Circle perimeter:", perim)
+        return perim
+
+
+class Rectangle(Shape):
+    def __init__(self, l, w):
+        self.l = l
+        self.w = w
+
+    def calc_perimeter(self):
+        perim = 2 * (self.l + self.w)
+        print("Rectangle perimeter:", perim)
+        return perim
+
+
+# Testing the classes
+triangle = Triangle(5, 6, 9)
+triangle.calc_perimeter()
+
+circle = Circle(3)
+circle.calc_perimeter()
+
+rectangle = Rectangle(7, 9)
+rectangle.calc_perimeter()
