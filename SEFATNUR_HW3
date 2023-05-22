@@ -1,0 +1,100 @@
+from collections import deque
+
+
+with open('hw3_q1.txt', 'r') as file:
+    lines = file.readlines()
+
+
+queue = deque()
+
+for line in lines:
+    command, name = line.strip().split()
+    if command == 'JUMP':
+        queue.appendleft(name)
+    elif command == 'JOIN':
+        queue.append(name)
+
+print("Final order of the queue:")
+for person in queue:
+    print(person)
+#the time complexity is O(n) here, n is the number of lines in the input file.the space complexity is O(n) where n is the number of people in the quese.
+#Assumption: the input file has input in correct format and accessible. it is not a large file.
+
+
+Question 2
+#non-recursive solution:
+def num_in_seq(n):
+    if n <= 0:
+        return None
+
+    first_number = 8
+    difference = 7
+
+    nth_number = first_number + (n - 1) * difference
+    return nth_number
+
+n = int(input("Enter the value of N: "))
+result = num_in_seq(n)
+print(f"The {n}th number in the sequence is: {result}")
+
+Recursive solution: 12 marks
+def num_in_seq_recursive(n):
+    if n == 1:
+        return 8
+    else:
+        return num_in_seq_recursive(n - 1) + 7
+
+
+n = int(input("Enter the value of N: "))
+result = num_in_seq_recursive(n)
+print(f"The {n}th number in the sequence is: {result}")
+
+QUESTION 3
+base_url = "https://codefirstgirls.com/"
+category_urls = ["/courses", "/opportunities"]
+subcategory_urls = ["/courses/cfgdegree", "/opportunities/ambassadors"]
+
+current_url = base_url
+
+while True:
+    print("You are currently on the URL", current_url)
+    print("Where are you clicking?")
+
+    if current_url == base_url:
+        print("Options: Courses, Opportunities")
+    elif current_url == base_url + "courses":
+        print("Options: CFGDegree, Back")
+    elif current_url == base_url + "opportunities":
+        print("Options: Ambassadors, Back")
+    elif current_url == base_url + "courses/cfgdegree":
+        print("Options: Back")
+    elif current_url == base_url + "opportunities/ambassadors":
+        print("Options: Back")
+
+    choice = input().strip().lower()
+
+    if current_url == base_url:
+        if choice == "courses":
+            current_url = base_url + "courses"
+        elif choice == "opportunities":
+            current_url = base_url + "opportunities"
+    elif current_url == base_url + "courses":
+        if choice == "cfgdegree":
+            current_url = base_url + "courses/cfgdegree"
+        elif choice == "back":
+            current_url = base_url
+    elif current_url == base_url + "opportunities":
+        if choice == "ambassadors":
+            current_url = base_url + "opportunities/ambassadors"
+        elif choice == "back":
+            current_url = base_url
+    elif current_url == base_url + "courses/cfgdegree" or current_url == base_url + "opportunities/ambassadors":
+        if choice == "back":
+            current_url = base_url + "courses" if current_url.startswith(
+                base_url + "courses") else base_url + "opportunities"
+
+    print()
+
+    #The time and space complexity of this solution is O(1). because it is not a recursive function or no loop is present. the number of urls are fixed and the options are limited. the execution time remains same.
+#Assumption: all the urls and options are not changing and limited. the input matches the options provided. it doesnot have any extensive error handling and input validation. so the time and space complexity can be thought of as constant.as the input size does not vary with the users. the inputs are predetermined.
+
